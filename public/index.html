@@ -5,11 +5,97 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Flash Bitácora</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="vendors/materialize/css/materialize.min.css">
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-  
+  <header>
+    <h2 class="center-align">Flash Bitácora</h2>
+  </header>
+  <main>
+    <div id="container" class="container">
+      <div class="row">
+        <div class="col s12 m8 offset-m2">
+          <div class="card horizontal">
+            <div class="card-stacked">
+              <div class="card-action">
+                <h5>Horizontal Card</h5>
+                <p>I am a very simple card.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Files -->
+    <!-- <input type="file" id="files" name="files[]" multiple />
+    <output id="list"></output> -->
+    <!-- Video -->
+    <!-- <video src="http://v2v.cc/~j/theora_testsuite/320x240.ogg" controls>
+      Tu navegador no implementa el elemento
+      <code>video</code>.
+    </video> -->
+    <!-- Audio -->
+    <!-- <audio src="">
+      <p>Tu navegador no implementa el elemento audio.</p>
+    </audio> -->
+    <!-- FAB -->
+    <div class="fixed-action-btn">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">mode_edit</i>
+    </a>
+    <ul>
+      <li id="music"><a class="btn-floating red modal-trigger" href="#modal1">
+        <i class="material-icons">library_music</i></a>
+      </li>
+      <li id="date"><a class="btn-floating yellow darken-1 modal-trigger" href="#modal1">
+        <i class="material-icons">date_range</i></a>
+      </li>
+      <li id="photo"><a class="btn-floating green modal-trigger" href="#modal1">
+        <i class="material-icons">photo</i></a>
+      </li>
+      <li id="message"><a class="btn-floating blue modal-trigger" href="#modal1">
+        <i class="material-icons">message</i>
+      </a></li>
+    </ul>
+  </div>
+  </main>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s6 m8">
+              <input id="title" type="text" class="validate">
+              <label class="title" for="title"></label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6 m8">
+              <input  type="text" id="texts" class="validate">
+              <input type="file" id="files" class="hide" name="files[]" multiple />
+              <!-- <output id="list"></output> -->
+              <label class="content" for="content"></label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s4">
+              <button id="submit" class="btn waves-effect waves-light" type="submit" name="action">Publicar
+                <i class="material-icons right">send</i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div> -->
+  </div>
+
   <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
   <script src="vendors/materialize/js/materialize.min.js"></script>
   <script src="js/app.js"></script>
