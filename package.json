@@ -1,0 +1,23 @@
+{
+  "name": "flash-bitacora",
+  "version": "1.0.0",
+  "description": "Es un project-demo que nos permite demostrar la funcionalidad de las APIS de html5.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucerohospina/flash-bitacora.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucerohospina/flash-bitacora/issues"
+  },
+  "homepage": "https://github.com/lucerohospina/flash-bitacora#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
