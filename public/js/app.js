@@ -1,8 +1,8 @@
-$(document).ready(function () {
+$(document).ready(function() {
   $('.modal').modal();
-  var $container= $('#container');
+  var $container = $('#container');
   var $submit = $('#submit');
-  var title, content, url, image;
+  var title, content;
 
   // Personalizando la estructura y estilos del modal
   
@@ -25,10 +25,9 @@ $(document).ready(function () {
     $submit.addClass('green');
   });
 
-  $('#date').on('click', function () {
+  $('#date').on('click', function() {
     $('.title').text('Título del evento');
     $('#texts').attr('type', 'date');
-    // TO DO: traer la fecha actual
     $('#texts').attr('min', '2018-02-20');
     // $('.content').text('¿En qué fecha es el evento?');
     $submit.removeClass('red');
@@ -37,7 +36,7 @@ $(document).ready(function () {
     $submit.addClass('yellow darken-1');
   });
 
-  $('#music').on('click', function () {
+  $('#music').on('click', function() {
     $('.title').text('Título del vídeo o audio');
     $('#texts').addClass('hide');
     $('#files').removeClass('hide');
@@ -47,6 +46,8 @@ $(document).ready(function () {
     $submit.addClass('red');
   });
 
+  // Eventos para los capturar valores de los inputs
+
   $('#title').on('input', function() {
     title = $(this).val();
   });
@@ -55,39 +56,117 @@ $(document).ready(function () {
     content = $(this).val();
   });
 
-  $('')
+  $('#files').change(function(result) {
+    var file = result.target.files[0],
+      imageType = /image.*/,
+      audioType = /audio.*/,
+      videoType = /video.*/,
+      type;
+    if (file.type.match(imageType)) {
+      render(file);
+    } else if (file.type.match(audioType)) {
+      type = 'audio';
+      multimedia(file, type);
+    } else if (file.type.match(videoType)) {
+      type = 'video';
+      multimedia(file, type);
+    }
+  });
   
   // Evento botón Publicar
   $submit.on('click', function() {
     var template;
-    if ($submit.hasClass('yellow')) {
-      initMap();  
-      template =
-        '<div class="row"><div class="col s12 m8 offset-m2"><div class="card horizontal"><div class="card-stacked"><div class="card-action"><h5>' + title + '</h5><p>' + content + '</p><div id="map"></div></div></div></div></div></div >';
+    if ($submit.hasClass('yellow')) { 
+      template = `
+        <div class="row">
+          <div class="col s12 m8 offset-m2">
+            <div class="card horizontal">
+              <div class="card-stacked">
+                <div class="card-action">
+                  <h5>${title}</h5>
+                  <p>${content}</p>
+                  <div id="map"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div >`;
     } else if ($submit.hasClass('green')) {
-      // TO DO: capturar ruta de imagen
-      handleFileSelect();
-      template =
-      '<div class="row"><div class="col s12 m8 offset-m2"><div class="card horizontal"><div class="card-stacked"><div class="card-action"><h5>' + title + '</h5><p>' + content + '</p></div></div></div></div></div >';
-      $('#image').attr('src', url);
-      
+      template = `
+        <div class="row">
+          <div class="col s12 m8 offset-m2">
+            <div class="card horizontal">
+              <div class="card-stacked">
+                <div class="card-action">
+                  <h5>${title}</h5>
+                  <img src="${localStorage.url}" class="responsive-img">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div >`;
     } else if ($submit.hasClass('red')) {
-      // TO DO: capturar dirección del video
-      template =
-        '<div class="row"><div class="col s12 m8 offset-m2"><div class="card horizontal"><div class="card-stacked"><div class="card-action"><h5>' + title + '</h5><video src="" controls>Tu navegador no implementa el elemento <code>video</code></video></div></div></div></div></div>';
-      // TO DO: capturar dirección del audio
-        template =
-        '<div class="row"><div class="col s12 m8 offset-m2"><div class="card horizontal"><div class="card-stacked"><div class="card-action"><h5>' + title + '</h5><audio src=""><p> Tu navegador no implementa el elemento audio.</p></audio></div></div></div></div></div>';
-      } else {
-      template =
-        '<div class="row"><div class="col s12 m8 offset-m2"><div class="card horizontal"><div class="card-stacked"><div class="card-action"><h5>' + title + '</h5><p>' + content + '</p></div></div></div></div></div >';
+      if (localStorage.type === 'audio') {
+        template = `
+            <div class="row">
+              <div class="col s12 m8 offset-m2">
+                <div class="card horizontal">
+                  <div class="card-stacked">
+                    <div class="card-action">
+                      <h5>${title}</h5>
+                      <audio src="${localStorage.url}" controls></audio>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>`;
+      } else if (localStorage.type === 'video') {
+        template = `
+            <div class="row">
+              <div class="col s12 m8 offset-m2">
+                <div class="card horizontal">
+                  <div class="card-stacked">
+                    <div class="card-action">
+                      <h5>${title}</h5>
+                      <video src="${localStorage.url}" controls></video>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>`;
+      }
+    } else {
+      template = `
+        <div class="row">
+          <div class="col s12 m8 offset-m2">
+            <div class="card horizontal">
+              <div class="card-stacked">
+                <div class="card-action">
+                  <h5>${title}</h5>
+                  <p>${content}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div >`;
     }
-
-    $container.append(template);
-    console.log($('#image'));
+    $container.prepend(template);
+    // Invoca la función para mostrar el mapa con la ubicación
+    // initMap(); // -> reubicarlo
     $('#title').val('');
     $('#texts').val('');
+    $('#files').val('');
   });
+
+  // Imagen
+  function render(file) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var result = e.target.result;
+      localStorage.url = result;
+    };
+    reader.readAsDataURL(file);
+  };
 
   // Google Maps API
   function initMap() {
@@ -98,7 +177,7 @@ $(document).ready(function () {
 
     var map = new google.maps.Map(document.getElementById('map'), {
       center: center,
-      zoom: 20
+      zoom: 15
     });
 
     var marker = new google.maps.Marker({
@@ -107,7 +186,7 @@ $(document).ready(function () {
     });
 
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (position) {
+      navigator.geolocation.getCurrentPosition(function(position) {
         var pos = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
@@ -120,27 +199,10 @@ $(document).ready(function () {
     }
   }
 
-  // Multimedia
-  function handleFileSelect(evt) {
-    var files = evt.target.files; // FileList object
-    for (var i = 0, f; f = files[i]; i++) {
-      if (!f.type.match('image.*')) {
-        continue;
-      }
-      var reader = new FileReader();
-      reader.onload = (function (theFile) {
-        return function (e) {
-          var span = document.createElement('span');
-          url = e.target.result;
-          console.log(url);
-          span.innerHTML = ['<img class="thumb" src="', url,
-            '" title="', escape(theFile.name), '"/>'].join('');
-          $('#list').append(span);
-        };
-      })(f);
-      // Read in the image file as a data URL.
-      reader.readAsDataURL(f);
-    }
+  // Audio y video
+  function multimedia(file, type) {
+    url = URL.createObjectURL(file);
+    localStorage.url = url;
+    localStorage.type = type;
   }
-  $('#files').on('change', handleFileSelect);
 });

@@ -1,11 +1,4 @@
 #map {
-  /* background-color: skyblue; */
   width: 30em;
   height: 30em;
-}
-
-.thumb {
-  height: 75px;
-  border: 1px solid #000;
-  margin: 10px 5px 0 0;
 }

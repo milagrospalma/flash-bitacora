@@ -14,87 +14,49 @@
     <h2 class="center-align">Flash Bitácora</h2>
   </header>
   <main>
-    <div id="container" class="container">
-      <!-- <div class="row">
-        <div class="col s12 m8 offset-m2">
-          <div class="card horizontal">
-            <div class="card-stacked">
-              <div class="card-action">
-                <h5>Horizontal Card</h5>
-                <p>I am a very simple card.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <div id="map"></div>
-    </div>
-    <!-- Files -->
-    <!-- <input type="file" id="files" name="files[]" multiple />
-    <output id="list"></output> -->
-    <!-- Video -->
-    <!-- <video src="http://v2v.cc/~j/theora_testsuite/320x240.ogg" controls>
-      Tu navegador no implementa el elemento
-      <code>video</code>.
-    </video> -->
-    <!-- Audio -->
-    <!-- <audio src="">
-      <p>Tu navegador no implementa el elemento audio.</p>
-    </audio> -->
+    <div id="container" class="container"></div> 
     <!-- FAB -->
     <div class="fixed-action-btn">
-    <a class="btn-floating btn-large red">
-      <i class="large material-icons">mode_edit</i>
-    </a>
-    <ul>
-      <li id="music"><a class="btn-floating red modal-trigger" href="#modal1">
-        <i class="material-icons">library_music</i></a>
-      </li>
-      <li id="date"><a class="btn-floating yellow darken-1 modal-trigger" href="#modal1">
-        <i class="material-icons">date_range</i></a>
-      </li>
-      <li id="photo"><a class="btn-floating green modal-trigger" href="#modal1">
-        <i class="material-icons">photo</i></a>
-      </li>
-      <li id="message"><a class="btn-floating blue modal-trigger" href="#modal1">
-        <i class="material-icons">message</i>
-      </a></li>
-    </ul>
-  </div>
+      <a class="btn-floating btn-large red">
+        <i class="large material-icons">mode_edit</i>
+      </a>
+      <ul>
+        <li id="music"><a class="btn-floating red modal-trigger" href="#modal1">
+          <i class="material-icons">library_music</i></a>
+        </li>
+        <li id="date"><a class="btn-floating yellow darken-1 modal-trigger" href="#modal1">
+          <i class="material-icons">date_range</i></a>
+        </li>
+        <li id="photo"><a class="btn-floating green modal-trigger" href="#modal1">
+          <i class="material-icons">photo</i></a>
+        </li>
+        <li id="message"><a class="btn-floating blue modal-trigger" href="#modal1">
+          <i class="material-icons">message</i>
+        </a></li>
+      </ul>
+    </div>
   </main>
-
-  <!-- Modal Structure -->
+  <!-- Modal -->
   <div id="modal1" class="modal">
     <div class="modal-content">
       <div class="row">
         <form class="col s12">
           <div class="row">
-            <div class="input-field col s6 m8">
+            <div class="input-field col s12 m12">
               <input id="title" type="text" autofocus>
               <label class="title" for="title"></label>
             </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s6 m8">
+            <div class="input-field col s12 m12">
               <input  type="text" id="texts">
               <input type="file" id="files" class="hide" name="files[]" multiple />
-              <output id="list"></output>
               <label class="content" for="content"></label>
             </div>
           </div>
-          <div class="row">
-            <div class="input-field col s4">
-              <a id="submit" class="modal-action modal-close waves-effect waves-light btn">button<i class="material-icons right">send</i></a>
-            </div>
-          </div>
+          <a id="submit" class="modal-action modal-close waves-effect waves-light btn">publicar<i class="material-icons right">send</i></a>
         </form>
       </div>
     </div>
-    <!-- <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div> -->
   </div>
-
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCw-kD4fHOOHP8t9XITsDZlVG_BJkGm_9s" async defer></script>
   <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
   <script src="vendors/materialize/js/materialize.min.js"></script>
